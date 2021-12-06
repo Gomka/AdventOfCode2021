@@ -41,7 +41,29 @@ public class Challenge2 implements IChallenge{
 
     @Override
     public int partTwo() {
-        return 0;
+        int horizontal = 0, depth = 0, aim = 0;
+        String[] components = new String[2];
+
+        try (BufferedReader br = new BufferedReader(new FileReader("data/Challenge2Input.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+
+                components = line.split(" ");
+
+                switch (components[0]) {
+                    case "forward": horizontal += Integer.parseInt(components[1]);
+                                    depth += aim * Integer.parseInt(components[1]);
+                    break;
+                    case "down": aim += Integer.parseInt(components[1]); break;
+                    case "up": aim -= Integer.parseInt(components[1]); break;
+                    default: break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return horizontal * depth;
     }
 
 }
